@@ -14,15 +14,24 @@ static const int user_bh            = 30;        /* 0 means that dwm will calcul
 static const int vertpad            = 10;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
 static const char *fonts[]          = { "monospace:size=14" };
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_mdark[]       = "#121212";
+
+/* one dark */
+static const char black[]       = "#1e222a";
+static const char gray2[]       = "#2e323a"; // unfocused window border
+static const char gray3[]       = "#545862";
+static const char gray4[]       = "#6d8dad";
+static const char blue[]        = "#61afef";  // focused window border
+static const char green[]       = "#7EC7A2";
+static const char red[]         = "#e06c75";
+static const char orange[]      = "#caaa6a";
+static const char yellow[]      = "#EBCB8B";
+static const char pink[]        = "#c678dd";
+static const char col_borderbar[]  = "#1e222a"; // inner border
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_mdark,  col_mdark },
+    [SchemeNorm]       = { gray3,   black,  gray2 },
+    [SchemeSel]        = { gray4,   blue,   col_borderbar  },
 };
 
 /* tagging */
