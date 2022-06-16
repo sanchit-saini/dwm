@@ -60,7 +60,10 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, 
+       SchemeTag, SchemeTag1, SchemeTag2, SchemeTag3, 
+       SchemeTag4, SchemeTag5, SchemeTag6, SchemeTag7, 
+       SchemeTag8, SchemeTag9}; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -135,6 +138,7 @@ struct Monitor {
 	unsigned int seltags;
 	unsigned int sellt;
 	unsigned int tagset[2];
+	unsigned int colorfultag;
 	int showbar;
 	int topbar;
 	Client *clients;
@@ -681,6 +685,7 @@ createmon(void)
 	m->nmaster = nmaster;
 	m->showbar = showbar;
 	m->topbar = topbar;
+    m->colorfultag = colorfultag ? colorfultag : 0;
 	m->gappih = gappih;
 	m->gappiv = gappiv;
 	m->gappoh = gappoh;
@@ -892,8 +897,19 @@ drawbar(Monitor *m)
 		continue;
 
         w = TEXTW(tags[i]);
-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
-		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+		 if (selmon->colorfultag)
+                        drw_setscheme(
+                                drw,
+                                scheme[m->tagset[m->seltags] & 1 << i
+                                        ? tagschemes[i] : SchemeTag]
+                        );
+                else
+                        drw_setscheme(
+                                drw,
+                                scheme[m->tagset[m->seltags] & 1 << i
+                                ? SchemeSel : SchemeTag]
+                        );
+        drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);

@@ -1,6 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
+static const unsigned int colorfultag    = 1;  /* 0 means use SchemeSel for selected tag */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
@@ -30,14 +31,50 @@ static const char yellow[]      = "#EBCB8B";
 static const char pink[]        = "#c678dd";
 static const char col_borderbar[]  = "#1e222a"; // inner border
 
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
+static const char col_bg[]          = "#1a1b26";
+static const char col_dark[]        = "#16161E";
+static const char col_fg[]          = "#a9b1d6";
+static const char col_black[]       = "#32344a";
+static const char col_red[]         = "#f7768e";
+static const char col_green[]       = "#9ece6a";
+static const char col_yellow[]      = "#e0af68";
+static const char col_blue[]        = "#7aa2f7";
+static const char col_magenta[]     = "#ad8ee6";
+static const char col_cyan[]        = "#449dab";
+static const char col_white[]       = "#787c99";
+static const char col_br_black[]    = "#444b6a";
+static const char col_br_red[]      = "#ff7a93";
+static const char col_br_green[]    = "#b9f27c";
+static const char col_br_yellow[]   = "#ff9e64";
+static const char col_br_blue[]     = "#7da6ff";
+static const char col_br_magenta[]  = "#bb9af7";
+static const char col_br_cyan[]     = "#0db9d7";
+static const char col_br_white[]    = "#acb0d0";
+
+static const char *colors[][3]           = {
+	/*                     fg              bg              border   */
     [SchemeNorm]       = { gray3,   black,  gray2 },
     [SchemeSel]        = { gray4,   blue,   col_borderbar  },
+    [SchemeTag]        = { col_br_black,   col_bg,         col_black },
+    [SchemeTag1]       = { col_fg,         col_dark,       col_black },
+	[SchemeTag2]       = { col_red,        col_dark,       col_black },
+    [SchemeTag3]       = { col_br_yellow,  col_dark,       col_black },
+    [SchemeTag4]       = { col_br_blue,    col_dark,       col_black },
+    [SchemeTag5]       = { col_br_magenta, col_dark,       col_black },
+	[SchemeTag6]       = { col_br_cyan,    col_dark,       col_black },
+	[SchemeTag7]       = { col_br_green,   col_dark,       col_black },
+	[SchemeTag8]       = { col_yellow,     col_dark,       col_black },
+	[SchemeTag9]       = { col_br_red,     col_dark,       col_black },
 };
 
 /* tagging */
 static char *tags[] = {"", "", "", "", "", "", "", "漣", ""};
+
+static const int tagschemes[] = {
+        SchemeTag1, SchemeTag2, SchemeTag3,
+        SchemeTag4, SchemeTag5, SchemeTag6,
+        SchemeTag7, SchemeTag8, SchemeTag9 
+};
 
 static const Rule rules[] = {
 	/* xprop(1):
