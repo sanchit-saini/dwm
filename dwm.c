@@ -256,6 +256,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void cyclelayout(const Arg *arg);
 
 /* variables */
 static const char autostartblocksh[] = "autostart_blocking.sh";
@@ -2483,6 +2484,23 @@ zoom(const Arg *arg)
 		if (!c || !(c = nexttiled(c->next)))
 			return;
 	pop(c);
+}
+
+void cyclelayout(const Arg *arg) {
+  Layout *l;
+  for (l = (Layout *)layouts; l != selmon->lt[selmon->sellt]; l++)
+    ;
+  if (arg->i > 0) {
+    if (l->symbol && (l + 1)->symbol)
+      setlayout(&((Arg){.v = (l + 1)}));
+    else
+      setlayout(&((Arg){.v = layouts}));
+  } else {
+    if (l != layouts && (l - 1)->symbol)
+      setlayout(&((Arg){.v = (l - 1)}));
+    else
+      setlayout(&((Arg){.v = &layouts[LENGTH(layouts) - 2]}));
+  }
 }
 
 int
