@@ -23,6 +23,7 @@ static const char *fonts[]          = { "monospace:size=14",
 /* one dark */
 static const char *colors[][3]           = {
 	/*                     fg              bg              border   */
+    [SchemeText]       = {"#f2f2f2", col_borderbar, col_borderbar},
     [SchemeNorm]       = { gray3,   black,  gray2 },
     [SchemeSel]        = { gray4,   blue,   col_borderbar  },
     [SchemeTag]        = { col_br_black,   col_bg,         col_black },
